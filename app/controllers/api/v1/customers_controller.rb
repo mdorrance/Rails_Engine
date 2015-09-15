@@ -15,4 +15,16 @@ class Api::V1::CustomersController < ApplicationController
     end
   end
 
+  def find_all
+    if params.include?("first_name")
+      respond_with Customer.where(first_name: params[:first_name])
+    else params.include?("last_name")
+      respond_with Customer.where(last_name: params[:last_name])
+    end
+  end
+
+  def random
+    respond_with Customer.limit(1).order("RANDOM()")
+  end
+
 end

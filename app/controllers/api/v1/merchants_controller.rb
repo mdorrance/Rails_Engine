@@ -12,4 +12,12 @@ class Api::V1::MerchantsController < ApplicationController
       respond_with Merchant.find_by(id: params[:id])
     end
   end
+
+  def find_all
+    respond_with Merchant.where(name: params[:name])
+  end
+
+  def random
+    respond_with Merchant.limit(1).order("RANDOM()")
+  end
 end
