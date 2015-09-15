@@ -31,6 +31,17 @@ Rails.application.routes.draw do
         get "invoices/:id/customer", to: "invoices/customers#show"
         get "invoices/:id/merchant", to: "invoices/merchants#show"
 
+        get "invoice_items/:id/invoice", to: "invoice_items/invoices#show"
+        get "invoice_items/:id/item", to: "invoice_items/items#show"
+
+        get "items/:id/invoice_items", to: "items/invoice_items#index"
+        get "items/:id/merchant", to: "items/merchants#show"
+
+        get "transactions/:id/invoice", to: "transactions/invoices#show"
+
+        get "customers/:id/invoices", to: "customers/invoices#index"
+        get "customers/:id/transactions", to: "customers/transactions#index"
+
         resources :items, only: [:show] #machines don't need views
         resources :merchants, only: [:show, :find] #machines don't need views
         resources :invoices, only: [:show] #machines don't need views
