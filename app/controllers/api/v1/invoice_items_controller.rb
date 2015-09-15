@@ -32,6 +32,6 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def random
-    respond_with InvoiceItem.limit(1).order("RANDOM()")
+    respond_with InvoiceItem.random
   end
 end
