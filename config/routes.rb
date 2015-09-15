@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
       namespace :v1 do
-        get "/merchants/find", to: "merchants#find"
+        # get "/merchants/find", to: "merchants#find"
         get "/customers/find", to: "customers#find"
         get "/invoice_items/find", to: "invoice_items#find"
         get "/invoices/find", to: "invoices#find"
@@ -21,6 +21,15 @@ Rails.application.routes.draw do
         get "/invoices/random", to: "invoices#random"
         get "/items/random", to: "items#random"
         get "/transactions/random", to: "transactions#random"
+
+        get "merchants/:id/items", to: "merchants/items#index"
+        get "merchants/:id/invoices", to: "merchants/invoices#index"
+
+        get "invoices/:id/transactions", to: "invoices/transactions#index"
+        get "invoices/:id/invoice_items", to: "invoices/invoice_items#index"
+        get "invoices/:id/items", to: "invoices/items#index"
+        get "invoices/:id/customer", to: "invoices/customers#show"
+        get "invoices/:id/merchant", to: "invoices/merchants#show"
 
         resources :items, only: [:show] #machines don't need views
         resources :merchants, only: [:show, :find] #machines don't need views
