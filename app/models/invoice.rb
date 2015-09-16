@@ -5,7 +5,17 @@ class Invoice < ActiveRecord::Base
   has_many :transactions
   has_many :items, through: :invoice_items
 
+
   def self.random
     self.limit(1).order("RANDOM()")
   end
+
+  def self.successful_invoices
+    joins(:transactions).where('transactions.result' => "success")
+  end
+
+
+
+
+
 end

@@ -42,12 +42,12 @@ Rails.application.routes.draw do
         get "customers/:id/invoices", to: "customers/invoices#index"
         get "customers/:id/transactions", to: "customers/transactions#index"
 
-        resources :items, only: [:show] #machines don't need views
-        resources :merchants, only: [:show, :find] #machines don't need views
-        resources :invoices, only: [:show] #machines don't need views
-        resources :transactions, only: [:show] #machines don't need views
-        resources :invoice_items, only: [:show] #machines don't need views
-        resources :customers, only: [:show] #machines don't need views
+        resources :items, only: [:index, :show] #machines don't need views
+        resources :merchants, only: [:index, :show, :find] #machines don't need views
+        resources :invoices, only: [:index, :show] #machines don't need views
+        resources :transactions, only: [:index, :show] #machines don't need views
+        resources :invoice_items, only: [:index, :show] #machines don't need views
+        resources :customers, only: [:index, :show] #machines don't need views
         # namespace :merchants do
         #   get "/find", path: "/find", to:"merchants#find"
         # end

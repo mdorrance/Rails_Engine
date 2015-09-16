@@ -1,33 +1,31 @@
 class Api::V1::TransactionsController < ApplicationController
   respond_to :json
 
+  def index
+    respond_with Transaction.all
+  end
+  
   def show
     respond_with Transaction.find_by(id: params[:id])
   end
 
   def find
-    if params.include?("invoice_id")
-      respond_with Transaction.find_by(invoice_id: params[:invoice_id])
-    elsif params.include?("credit_card_number")
-      respond_with Transaction.find_by(credit_card_number: params[:credit_card_number])
-    elsif params.include?("result")
-      respond_with Transaction.find_by(result: params[:result])
-    else
-      respond_with Transaction.find_by(id: params[:id])
-    end
+    respond_with Transaction.find_by(transactions_params)
+
   end
 
   def find_all
-    if params.include?("invoice_id")
-      respond_with Transaction.where(invoice_id: params[:invoice_id])
-    elsif params.include?("credit_card_number")
-      respond_with Transaction.where(credit_card_number: params[:credit_card_number])
-    else params.include?("result")
-      respond_with Transaction.where(result: params[:result])
-    end
+    respond_with Transaction.where(transactions_params)
   end
 
   def random
     respond_with Transaction.limit(1).order("RANDOM()")
+  end
+
+  private
+
+  def transactions_params
+    params.permit(:id, :invoice_id, :credit_card_number, :result,
+                  :created_at, :updated_at)
   end
 end
