@@ -11,7 +11,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       Item.create(id: 1,
                       name: "Mike",
                       description: "D",
-                      unit_price: "1234",
+                      unit_price: 12.34,
                       merchant_id: 1
                       )
 
@@ -22,7 +22,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       expect(response).to have_http_status(:success)
       expect(item[:name]).to eq "Mike"
       expect(item[:description]).to eq "D"
-      expect(item[:unit_price]).to eq "1234"
+      expect(item[:unit_price]).to eq "12.34"
       expect(item[:merchant_id]).to eq 1
       expect(item[:id]).to equal 1
 
@@ -37,7 +37,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       item1= Item.create(id: 1,
                       name: "Pants",
                       description: "DD",
-                      unit_price: "1234",
+                      unit_price: 12.34,
                       merchant_id: 1
                       )
 
@@ -60,7 +60,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       Item.create(id: 1,
                       name: "Mike",
                       description: "Does great",
-                      unit_price: "1234",
+                      unit_price: 12.34,
                       merchant_id: 1
                       )
 
@@ -83,7 +83,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       Item.create(id: 1,
                       name: "Mike",
                       description: "Does great",
-                      unit_price: "1234",
+                      unit_price: 12.34,
                       merchant_id: 1
                       )
 
@@ -93,7 +93,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       item_json = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to have_http_status(:success)
-      expect(item_json[:unit_price]).to eq "1234"
+      expect(item_json[:unit_price]).to eq "12.34"
 
     end
   end
@@ -106,7 +106,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       Item.create(id: 1,
                       name: "Mike",
                       description: "Does great",
-                      unit_price: "1234",
+                      unit_price: 12.34,
                       merchant_id: 1
                       )
 
@@ -130,7 +130,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Mike",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
 
@@ -156,19 +156,19 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       Item.create(id: 2,
                   name: "Pants",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
       Item.create(id: 1,
                   name: "Shirt",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
       Item.create(id: 3,
                   name: "Sock",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
 
@@ -192,19 +192,19 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       Item.create(id: 2,
                   name: "Pants",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
       Item.create(id: 1,
                   name: "Shirt",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
       Item.create(id: 3,
                   name: "Sock",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
 
@@ -228,24 +228,24 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       Item.create(id: 2,
                   name: "Pants",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
       Item.create(id: 1,
                   name: "Shirt",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
       Item.create(id: 3,
                   name: "Sock",
                   description: "D",
-                  unit_price: "123",
+                  unit_price: 12.32,
                   merchant_id: 1
                   )
 
 
-      get :find_all, format: :json, unit_price: "1234"
+      get :find_all, format: :json, unit_price: "12.34"
 
       item_json = JSON.parse(response.body, symbolize_names: true)
 
@@ -264,19 +264,19 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       Item.create(id: 2,
                   name: "Pants",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
       Item.create(id: 1,
                   name: "Shirt",
                   description: "D",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1
                   )
       Item.create(id: 3,
                   name: "Sock",
                   description: "D",
-                  unit_price: "123",
+                  unit_price: 12.45,
                   merchant_id: 1
                   )
 
@@ -299,7 +299,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       Item.create(id: 3,
                   name: "Sock",
                   description: "D",
-                  unit_price: "123",
+                  unit_price: 12.56,
                   merchant_id: 1
                   )
 
@@ -310,7 +310,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       expect(response).to have_http_status(:success)
       expect(item_json.count).to eq 1
       expect(item_json.first[:name]).to eq "Sock"
-      expect(item_json.first[:unit_price]).to eq "123"
+      expect(item_json.first[:unit_price]).to eq "12.56"
 
     end
   end

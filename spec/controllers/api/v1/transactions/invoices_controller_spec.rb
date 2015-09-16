@@ -27,7 +27,6 @@ RSpec.describe Api::V1::Transactions::InvoicesController, type: :controller do
       Transaction.create(id: 1,
                         invoice_id: 1,
                         credit_card_number: "123456789",
-                        credit_card_expiration_date: "",
                         result: "success"
                         )
 

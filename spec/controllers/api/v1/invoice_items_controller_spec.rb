@@ -13,7 +13,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Pants",
                   description: "Long",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1)
       Invoice.create(id: 1,
                      customer_id: 1,
@@ -21,8 +21,8 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
                      status: "shipped")
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
 
       get :show, format: :json, id: InvoiceItem.first.id
 
@@ -45,7 +45,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Pants",
                   description: "Long",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1)
       Invoice.create(id: 1,
                      customer_id: 1,
@@ -53,8 +53,8 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
                      status: "shipped")
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
 
       get :find, format: :json, item_id: "1"
 
@@ -62,7 +62,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
 
       expect(response).to have_http_status(:success)
       expect(invoice_json[:invoice_id]).to equal 1
-      expect(invoice_json[:quantity]).to eq "2"
+      expect(invoice_json[:quantity]).to eq 2
 
     end
   end
@@ -77,7 +77,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Pants",
                   description: "Long",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1)
       Invoice.create(id: 1,
                      customer_id: 1,
@@ -85,16 +85,16 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
                      status: "shipped")
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
 
       get :find, format: :json, invoice_id: "1"
 
       invoice_json = JSON.parse(response.body, symbolize_names: true)
       expect(response).to have_http_status(:success)
       expect(invoice_json[:item_id]).to equal 1
-      expect(invoice_json[:quantity]).to eq "2"
-      expect(invoice_json[:unit_price]).to eq "1234"
+      expect(invoice_json[:quantity]).to eq 2
+      expect(invoice_json[:unit_price]).to eq "12.34"
 
     end
   end
@@ -108,7 +108,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Pants",
                   description: "Long",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1)
       Invoice.create(id: 1,
                      customer_id: 1,
@@ -116,14 +116,14 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
                      status: "shipped")
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
 
       get :find, format: :json, quantity: "2"
 
       invoice_json = JSON.parse(response.body, symbolize_names: true)
       expect(response).to have_http_status(:success)
-      expect(invoice_json[:unit_price]).to eq "1234"
+      expect(invoice_json[:unit_price]).to eq "12.34"
       expect(invoice_json[:invoice_id]).to eq 1
 
     end
@@ -139,7 +139,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Pants",
                   description: "Long",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1)
       Invoice.create(id: 1,
                      customer_id: 1,
@@ -147,15 +147,15 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
                      status: "shipped")
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
 
-      get :find, format: :json, unit_price: "1234"
+      get :find, format: :json, unit_price: "12.34"
 
       invoice_json = JSON.parse(response.body, symbolize_names: true)
       expect(response).to have_http_status(:success)
       expect(invoice_json[:invoice_id]).to equal 1
-      expect(invoice_json[:quantity]).to eq "2"
+      expect(invoice_json[:quantity]).to eq 2
 
     end
   end
@@ -170,7 +170,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Pants",
                   description: "Long",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1)
       Invoice.create(id: 1,
                      customer_id: 1,
@@ -178,12 +178,12 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
                      status: "shipped")
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
 
       get :find_all, format: :json, item_id: 1
 
@@ -204,7 +204,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Pants",
                   description: "Long",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1)
       Invoice.create(id: 1,
                      customer_id: 1,
@@ -212,16 +212,16 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
                      status: "shipped")
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
 
       get :find_all, format: :json, invoice_id: 1
 
@@ -242,7 +242,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Pants",
                   description: "Long",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1)
       Invoice.create(id: 1,
                      customer_id: 1,
@@ -250,16 +250,16 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
                      status: "shipped")
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "1",
-                         unit_price: "1234")
+                         quantity: 1,
+                         unit_price: 12.34)
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
 
       get :find_all, format: :json, quantity: "2"
 
@@ -280,7 +280,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Pants",
                   description: "Long",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1)
       Invoice.create(id: 1,
                      customer_id: 1,
@@ -288,18 +288,18 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
                      status: "shipped")
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "1",
-                         unit_price: "1234")
+                         quantity: 1,
+                         unit_price: 12.34)
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
 
-      get :find_all, format: :json, unit_price: "1234"
+      get :find_all, format: :json, unit_price: "12.34"
 
       invoice_json = JSON.parse(response.body, symbolize_names: true)
 
@@ -318,7 +318,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       Item.create(id: 1,
                   name: "Pants",
                   description: "Long",
-                  unit_price: "1234",
+                  unit_price: 12.34,
                   merchant_id: 1)
       Invoice.create(id: 1,
                      customer_id: 1,
@@ -326,8 +326,8 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
                      status: "shipped")
       InvoiceItem.create(item_id: 1,
                          invoice_id: 1,
-                         quantity: "2",
-                         unit_price: "1234")
+                         quantity: 2,
+                         unit_price: 12.34)
 
 
       get :random, format: :json

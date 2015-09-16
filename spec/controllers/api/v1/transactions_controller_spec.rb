@@ -24,7 +24,6 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
       Transaction.create(
                          invoice_id: 1,
                          credit_card_number: "123456789",
-                         credit_card_expiration_date: "",
                          result: "success"
                          )
 
@@ -61,7 +60,6 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
       transaction = Transaction.create(
                          invoice_id: 1,
                          credit_card_number: "123456789",
-                         credit_card_expiration_date: "",
                          result: "success"
                          )
 
@@ -97,7 +95,6 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
       Transaction.create(
                          invoice_id: 1,
                          credit_card_number: "123456789",
-                         credit_card_expiration_date: "",
                          result: "success"
                          )
 
@@ -132,7 +129,6 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
       Transaction.create(
                          invoice_id: 1,
                          credit_card_number: "123456789",
-                         credit_card_expiration_date: "",
                          result: "success"
                          )
 
@@ -167,13 +163,11 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
       Transaction.create(
                          invoice_id: 1,
                          credit_card_number: "123456789",
-                         credit_card_expiration_date: "",
                          result: "success"
                          )
       Transaction.create(
                          invoice_id: 1,
                          credit_card_number: "123456789",
-                         credit_card_expiration_date: "",
                          result: "success"
                          )
 
@@ -206,13 +200,11 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
       Transaction.create(
                          invoice_id: 1,
                          credit_card_number: "123456789",
-                         credit_card_expiration_date: "",
                          result: "success"
                          )
       Transaction.create(
                          invoice_id: 1,
                          credit_card_number: "123456789",
-                         credit_card_expiration_date: "",
                          result: "success"
                          )
 
@@ -246,7 +238,6 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
       Transaction.create(
                          invoice_id: 1,
                          credit_card_number: "123456789",
-                         credit_card_expiration_date: "",
                          result: "success"
                          )
 
@@ -280,7 +271,6 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
       Transaction.create(
                          invoice_id: 1,
                          credit_card_number: "123456789",
-                         credit_card_expiration_date: "",
                          result: "success"
                          )
 
