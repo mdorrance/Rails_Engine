@@ -8,11 +8,11 @@ class Merchant < ActiveRecord::Base
     self.limit(1).order("RANDOM()")
   end
 
-  def self.revenue(merchant_id)
-    revenue = 0
-    Merchant.find(merchant_id).invoice_items.successful_invoice_items.pluck(:quantity, :unit_price).flatten.each do |quantity, unit_price|
-      revenue += (quantity.to_i * unit_price.to_i)
-    end
-    revenue
+  def revenue
+    key = invoice_items.successful_invoice_items.pluck(:quantity, :unit_price).map do |quantity, unit_price|
+      quantity * unit_price
+    end.reduce :+
+
+    {revenue: key}
   end
 end

@@ -4,7 +4,7 @@ class Api::V1::MerchantsController < ApplicationController
   def index
     respond_with Merchant.all
   end
-  
+
   def show
     respond_with Merchant.find_by(id: params[:id])
   end
@@ -19,6 +19,10 @@ class Api::V1::MerchantsController < ApplicationController
 
   def random
     respond_with Merchant.random
+  end
+
+  def revenue
+    respond_with Merchant.find_by(id: params[:id]).revenue
   end
 
   private
