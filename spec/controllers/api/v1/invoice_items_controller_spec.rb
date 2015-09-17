@@ -3,6 +3,37 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
 
+  describe '#index' do
+    it "responds OK" do
+      Customer.create(id: 1,
+                      first_name: "Joe",
+                      last_name:  "Sampson")
+      Merchant.create(id: 1,
+                      name: "Target")
+      Item.create(id: 1,
+                  name: "Pants",
+                  description: "Long",
+                  unit_price: 12.34,
+                  merchant_id: 1)
+      Invoice.create(id: 1,
+                     customer_id: 1,
+                     merchant_id: 1,
+                     status: "shipped")
+      InvoiceItem.create(item_id: 1,
+                         invoice_id: 1,
+                         quantity: 2,
+                         unit_price: 12.34)
+
+      get :index, format: :json
+
+      invoice_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:success)
+      expect(invoice_item.count).to equal 1
+
+    end
+  end
+
   describe '#show' do
     it "responds OK" do
       Customer.create(id: 1,
@@ -195,7 +226,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
     end
   end
   describe '#find_all params invoice_id' do
-    xit "responds OK" do
+    it "responds OK" do
       Customer.create(id: 1,
                       first_name: "Joe",
                       last_name:  "Sampson")
@@ -233,7 +264,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
     end
   end
   describe '#find_all params quantity' do
-    xit "responds OK" do
+    it "responds OK" do
       Customer.create(id: 1,
                       first_name: "Joe",
                       last_name:  "Sampson")
@@ -271,7 +302,7 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
     end
   end
   describe '#find_all params unit_price' do
-    xit "responds OK" do
+    it "responds OK" do
       Customer.create(id: 1,
                       first_name: "Joe",
                       last_name:  "Sampson")

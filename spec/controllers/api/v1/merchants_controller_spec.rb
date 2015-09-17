@@ -169,6 +169,51 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
 
     end
   end
+  describe '#revenue w date' do
+    it "responds OK" do
+      Customer.create(id: 3,
+                      first_name: "Joe",
+                      last_name:  "Sampson")
+      Merchant.create(id: 1,
+                      name: "Target")
+      Item.create(id: 1,
+                  name: "Pants",
+                  description: "Long",
+                  unit_price: 12.45,
+                  merchant_id: 1)
+      invoice = Invoice.create(id: 1,
+                     customer_id: 3,
+                     merchant_id: 1,
+                     status: "shipped")
+      Invoice.create(id: 2,
+                     customer_id: 3,
+                     merchant_id: 1,
+                     status: "shipped")
+      Invoice.create(id: 3,
+                     customer_id: 3,
+                     merchant_id: 1,
+                     status: "shipped")
+      InvoiceItem.create(item_id: 1,
+                         invoice_id: 1,
+                         quantity: 2,
+                         unit_price: 12.45)
+      InvoiceItem.create(item_id: 1,
+                         invoice_id: 1,
+                         quantity: 2,
+                         unit_price: 12.45)
+     Transaction.create(
+                        invoice_id: 1,
+                        credit_card_number: "123456789",
+                        result: "success"
+                        )
+
+      get :revenue, format: :json, id: 1, date: invoice.created_at
+
+      revenue = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to have_http_status(:success)
+
+    end
+  end
 
   describe '#most_revenue' do
     it "responds OK" do
@@ -213,6 +258,53 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
       invoice_item = JSON.parse(response.body, symbolize_names: true)
       expect(response).to have_http_status(:success)
       expect("Target").to eq invoice_item.first[:name]
+
+    end
+  end
+
+  describe '#revenue_date' do
+    it "responds OK" do
+      Customer.create(id: 3,
+                      first_name: "Joe",
+                      last_name:  "Sampson")
+      Merchant.create(id: 1,
+                      name: "Target")
+      Item.create(id: 1,
+                  name: "Pants",
+                  description: "Long",
+                  unit_price: 12.45,
+                  merchant_id: 1)
+      invoice = Invoice.create(id: 1,
+                     customer_id: 3,
+                     merchant_id: 1,
+                     status: "shipped")
+      Invoice.create(id: 2,
+                     customer_id: 3,
+                     merchant_id: 1,
+                     status: "shipped")
+      Invoice.create(id: 3,
+                     customer_id: 3,
+                     merchant_id: 1,
+                     status: "shipped")
+      InvoiceItem.create(item_id: 1,
+                         invoice_id: 1,
+                         quantity: 2,
+                         unit_price: 12.45)
+      InvoiceItem.create(item_id: 1,
+                         invoice_id: 1,
+                         quantity: 2,
+                         unit_price: 12.45)
+     Transaction.create(
+                        invoice_id: 1,
+                        credit_card_number: "123456789",
+                        result: "success"
+                        )
+
+      get :revenue_date, format: :json, date: invoice.created_at
+
+      invoice_item = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to have_http_status(:success)
+
 
     end
   end

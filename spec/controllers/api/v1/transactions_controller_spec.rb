@@ -3,6 +3,40 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::TransactionsController, type: :controller do
 
+  describe '#index' do
+    it "responds OK" do
+      Customer.create(
+                      id: 1,
+                      first_name: "Joe",
+                      last_name:  "Sampson"
+                      )
+      Merchant.create(
+                      id: 1,
+                      name: "Target"
+                      )
+      Invoice.create(
+                     id: 1,
+                     customer_id: 1,
+                     merchant_id: 1,
+                     status: "shipped"
+                     )
+
+      Transaction.create(
+                         invoice_id: 1,
+                         credit_card_number: "123456789",
+                         result: "success"
+                         )
+
+      get :index, format: :json
+
+      transactions = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:success)
+      expect(transactions.count).to equal 1
+
+    end
+  end
+
   describe '#show' do
     it "responds OK" do
       Customer.create(

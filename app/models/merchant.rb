@@ -13,8 +13,16 @@ class Merchant < ActiveRecord::Base
     {revenue: key}
   end
 
+  def self.most_revenue(quantity)
+    self.all.sort_by { |merchant| merchant.total_revenue }.reverse.take(quantity)
+  end
+
   def total_revenue
     invoices.successful_invoices.joins(:invoice_items).sum("unit_price * quantity")
+  end
+  
+  def self.most_items(quantity)
+    self.all.sort_by { |merchant| merchant.total_items }.reverse.take(quantity)
   end
 
   def total_items

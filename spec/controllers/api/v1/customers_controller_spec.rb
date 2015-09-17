@@ -3,6 +3,31 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::CustomersController, type: :controller do
 
+  describe '#index' do
+    it "responds OK" do
+      Customer.create(id: 1,
+                      first_name: "Mike",
+                      last_name: "D"
+                      )
+      Customer.create(id: 2,
+                      first_name: "Mike",
+                      last_name: "Dorr"
+                      )
+      Customer.create(id: 3,
+                      first_name: "Mike",
+                      last_name: "Dorrance"
+                      )
+
+      get :index, format: :json
+
+      customer = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:success)
+      expect(customer.count).to equal 3
+
+    end
+  end
+
   describe '#show' do
     it "responds OK" do
       Customer.create(id: 1,

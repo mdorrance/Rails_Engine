@@ -31,12 +31,12 @@ class Api::V1::MerchantsController < ApplicationController
 
   def most_items
     quantity = params["quantity"].to_i
-    respond_with  Merchant.all.sort_by { |merchant| merchant.total_items }.reverse.take(quantity)
+    respond_with  Merchant.most_items(quantity)
   end
 
   def most_revenue
     quantity = params["quantity"].to_i
-    respond_with Merchant.all.sort_by { |merchant| merchant.total_revenue }.reverse.take(quantity)
+    respond_with Merchant.most_revenue(quantity)
   end
 
   def revenue_date
