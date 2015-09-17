@@ -7,4 +7,16 @@ class Item < ActiveRecord::Base
     self.limit(1).order("RANDOM()")
   end
 
+  def most_revenue
+    invoice_items.successful_invoice_items.sum("unit_price * quantity")
+  end
+
+  def most_items
+    invoice_items.successful_invoice_items.sum("quantity")
+  end
+
+  def best_day
+
+  end
+
 end

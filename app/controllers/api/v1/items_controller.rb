@@ -4,7 +4,7 @@ class Api::V1::ItemsController < ApplicationController
   def index
     respond_with Item.all
   end
-  
+
   def show
     respond_with Item.find_by(id: params[:id])
   end
@@ -19,6 +19,20 @@ class Api::V1::ItemsController < ApplicationController
 
   def random
     respond_with Item.random
+  end
+
+  def most_revenue
+    quantity = params["quantity"].to_i
+    respond_with Item.all.sort_by { |item| item.most_revenue }.reverse.take(quantity)
+  end
+
+  def most_items
+    quantity = params["quantity"].to_i
+    respond_with  Item.all.sort_by { |item| item.most_items }.reverse.take(quantity)
+  end
+
+  def best_day
+
   end
 
   private

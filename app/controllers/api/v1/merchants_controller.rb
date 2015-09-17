@@ -22,7 +22,34 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def revenue
-    respond_with Merchant.find_by(id: params[:id]).revenue
+    if params["date"]
+      respond_with Merchant.find_by(id: params[:id]).revenue_by_date(params["date"])
+    else
+      respond_with Merchant.find_by(id: params[:id]).revenue
+    end
+  end
+
+  def most_items
+    quantity = params["quantity"].to_i
+    respond_with  Merchant.all.sort_by { |merchant| merchant.total_items }.reverse.take(quantity)
+  end
+
+  def most_revenue
+    quantity = params["quantity"].to_i
+    respond_with Merchant.all.sort_by { |merchant| merchant.total_revenue }.reverse.take(quantity)
+  end
+
+  def revenue_date
+    date = params["date"]
+    respond_with Merchant.revenue_by_date(date)
+  end
+
+  def favorite_customer
+    respond_with Merchant.find_by(id: params[:id]).favorite_customer
+  end
+
+  def customers_with_pending_invoices
+    respond_with Merchant.find_by(id: params[:id]).customers_with_pending_invoices
   end
 
   private

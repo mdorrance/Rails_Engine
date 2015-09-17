@@ -8,7 +8,7 @@ class InvoiceItem < ActiveRecord::Base
   end
 
   def self.successful_invoice_items
-    joins(:transactions).where('transactions.result' => "success")
+    self.joins(:transactions).where('transactions.result' => "success")
   end
 
   def self.revenue(invoice_item_id)

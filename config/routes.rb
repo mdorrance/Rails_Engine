@@ -25,6 +25,11 @@ Rails.application.routes.draw do
         get "merchants/:id/items", to: "merchants/items#index"
         get "merchants/:id/invoices", to: "merchants/invoices#index"
         get "merchants/:id/revenue", to: "merchants#revenue"
+        get "merchants/:id/favorite_customer", to: "merchants#favorite_customer"
+        get "merchants/:id/customers_with_pending_invoices", to: "merchants#customers_with_pending_invoices"
+        get "merchants/most_items", to: "merchants#most_items"
+        get "merchants/most_revenue", to: "merchants#most_revenue"
+        get "merchants/revenue", to: "merchants#revenue_date"
 
         get "invoices/:id/transactions", to: "invoices/transactions#index"
         get "invoices/:id/invoice_items", to: "invoices/invoice_items#index"
@@ -37,11 +42,15 @@ Rails.application.routes.draw do
 
         get "items/:id/invoice_items", to: "items/invoice_items#index"
         get "items/:id/merchant", to: "items/merchants#show"
+        get "items/:id/best_day", to: "items#best_day"
+        get "items/most_revenue", to: "items#most_revenue"
+        get "items/most_items", to: "items#most_items"
 
         get "transactions/:id/invoice", to: "transactions/invoices#show"
 
         get "customers/:id/invoices", to: "customers/invoices#index"
         get "customers/:id/transactions", to: "customers/transactions#index"
+        get "customers/:id/favorite_merchant", to: "customers#favorite_merchant"
 
         resources :items, only: [:index, :show] #machines don't need views
         resources :merchants, only: [:index, :show, :find] #machines don't need views
