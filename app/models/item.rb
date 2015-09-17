@@ -16,7 +16,7 @@ class Item < ActiveRecord::Base
   end
 
   def best_day
-
+    invoice_items.successful_invoice_items.group(:quantity).count
   end
 
 end
